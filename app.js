@@ -6,8 +6,8 @@ const PORT = 3000;
 
 app.get('/', async (req, res)=>{
     res.status(200);
-    const result = await db.query('SELECT * FROM shelflabel');
-    res.json(result.rows);
+    // const result = await db.query('SELECT * FROM shelflabel');
+    // res.json(result.rows);
 });
 
 app.listen(PORT, (error) =>{
