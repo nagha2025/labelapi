@@ -2,10 +2,11 @@ const express = require('express');
 const db = require('./db');
 
 const app = express();
-const PORT = 3000;
+// const PORT = 3000;
 
 app.get('/', async (req, res)=>{
     res.status(200);
+    res.send('Welcome to the Shelf Label API');
     // const result = await db.query('SELECT * FROM shelflabel');
     // res.json(result.rows);
 });
