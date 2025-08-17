@@ -11,7 +11,7 @@ app.get('/', async (req, res)=>{
     // res.json(result.rows);
 });
 
-app.listen(PORT, (error) =>{
+app.listen(3000, (error) =>{
     if(!error)
         console.log("Server is Successfully Running, and App is listening on port "+ PORT);
     else 
