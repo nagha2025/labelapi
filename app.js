@@ -2,7 +2,7 @@ const express = require('express');
 const db = require('./db');
 
 const app = express();
-const PORT = 3031;
+const PORT = 3000;
 
 app.get('/', async (req, res)=>{
     res.status(200);
