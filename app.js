@@ -6,7 +6,7 @@ const PORT = 3000;
 
 app.get('/:apikey', async (req, res)=>{
 
-    // console.log(req.params.apikey);
+    console.log(req.params.apikey);
     
     if(req.params.apikey=== 'UiV4Qr5Udbpr3Jm') {
         // res.send('Welcome to the Shelf Label API');
