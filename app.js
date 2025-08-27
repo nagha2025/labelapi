@@ -1,8 +1,15 @@
 const express = require('express');
 const db = require('./db');
+// const bodyParser = require('body-parser');
 
 const app = express();
 const PORT = 3000;
+
+app.use(express.json());
+app.use(express.urlencoded({
+  extended: true
+}));
+
 
 app.get('/:apikey', async (req, res)=>{
 
@@ -22,13 +29,12 @@ app.get('/:apikey', async (req, res)=>{
 
 app.post('/updateshelf/:apikey', async (req, res)=>{
 
-    console.log(req);
-    console.log(req.data.price);
+    console.log(req.body.price);
     console.log(req.body.discount);
     console.log(req.body.shelf);
         
     if(req.params.apikey=== 'uZMeXQsUlruWM86') {
-        var query = "update shelflabel set price="+req.body.price+", discount="+req.body.discount+"where shelf='"+req.body.shelf+"'";    
+        var query = "update shelflabel set price="+req.body.price+", discount="+req.body.discount+" where shelf='"+req.body.shelf+"'";    
         const result = (await db.client.query(query,[]));
         res.status(200);
         res.send("Success");
@@ -40,8 +46,7 @@ app.post('/updateshelf/:apikey', async (req, res)=>{
 
 app.post('/addshelf/:apikey', async (req, res)=>{
 
-    console.log(req);
-    console.log(req.data.price);
+    console.log(req.body.price);
     console.log(req.body.discount);
     console.log(req.body.shelf);
         
