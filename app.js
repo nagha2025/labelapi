@@ -11,13 +11,32 @@ app.use(express.urlencoded({
 }));
 
 
-app.get('/:apikey', async (req, res)=>{
+app.get('/getall/:apikey', async (req, res)=>{
 
     console.log(req.params.apikey);
     
     if(req.params.apikey=== 'UiV4Qr5Udbpr3Jm') {
         // res.send('Welcome to the Shelf Label API');
-        const result = (await db.client.query('SELECT * FROM shelflabel',[])).rows[0];
+        const result = ((await db.client.query('SELECT * FROM shelflabel',[])).rows);
+        // console.log('Query result:', result);
+        res.status(200);
+        res.send(result);
+    }else {
+        res.status(403);
+        res.send('Forbidden: Not Authorized');
+    }
+});
+
+app.get('/:apikey/:shelflbl', async (req, res)=>{
+
+    console.log(req.params);
+    const selquery = 'SELECT * FROM shelflabel where shelf = \''+req.params.shelflbl+'\''
+
+    console.log(selquery)
+    
+    if(req.params.apikey=== 'UiV4Qr5Udbpr3Jm') {
+        // res.send('Welcome to the Shelf Label API');
+        const result = ((await db.client.query(selquery,[])).rows[0]);
         // console.log('Query result:', result);
         res.status(200);
         res.send(result);
