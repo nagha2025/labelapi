@@ -71,7 +71,7 @@ app.post('/updateshelf/:apikey', async (req, res)=>{
     console.log(req.body.product);
         
     if(req.params.apikey=== 'uZMeXQsUlruWM86') {
-        var query = "update shelflabel set price="+req.body.price+", discount="+req.body.discount+", product='"+req.body.product+"\' where shelf='"+req.body.shelf+"'";    
+        var query = "update shelflabel set price="+req.body.price+", product='"+req.body.product+"\' where shelf='"+req.body.shelf+"'";    
         console.log(query);
         const result = (await db.client.query(query,[]));
         res.status(200);
@@ -87,7 +87,7 @@ app.post('/addshelf/:apikey', async (req, res)=>{
     console.log(req.body.shelf);
         
     if(req.params.apikey=== 'uZMeXQsUlruWM86') {
-        var query = "insert into shelflabel(shelf,price,discount,product) values (req.body.shelf,req.body.price,req.body.discount,req.body.product)";
+        var query = "insert into shelflabel(shelf,price,product) values (req.body.shelf,req.body.price,req.body.product)";
         const result = (await db.client.query(query,[]));
         res.status(201);
         res.send("Success");
