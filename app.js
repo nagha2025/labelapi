@@ -7,8 +7,8 @@ const app = express();
 const PORT = 3000;
 
 const corsOptions = {
-    // origin: 'http://localhost:3003',
-    origin: 'https://label-app-ay54.onrender.com',
+    origin: 'http://localhost:3003',
+    // origin: 'https://label-app-ay54.onrender.com',
     credentials: true,
     optionSuccessStatus: 200
 }
@@ -16,8 +16,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use(function (req, res, next) {
-    // res.header('Access-Control-Allow-Origin', "http://localhost:3003");
-    res.header('Access-Control-Allow-Origin', "https://label-app-ay54.onrender.com");
+    res.header('Access-Control-Allow-Origin', "http://localhost:3003");
+    // res.header('Access-Control-Allow-Origin', "https://label-app-ay54.onrender.com");
     res.header('Access-Control-Allow-Headers', true);
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Methods', 'GET, POST');
@@ -78,6 +78,28 @@ app.post('/updateshelf/:apikey', async (req, res)=>{
         const result = (await db.client.query(query,[]));
         res.status(200);
         res.send("Success");
+    }else {
+        res.status(403);
+        res.send('Forbidden: Not Authorized');
+    }
+});
+
+app.post('/updateprod/:apikey', async (req, res)=>{
+
+    console.log(req.body.shelf);
+    console.log(req.body.product);
+        
+    if(req.params.apikey=== 'uZMeXQsUlruWM86') {
+        var selqry = "select * from productdb where prodname like '%"+req.body.product+"%'";
+        const prodresult = ((await db.client.query(selqry,[])).rows[0]);
+        console.log(prodresult);
+        if(prodresult){
+            var query = "update shelflabel set price="+prodresult.price+", product='"+prodresult.prodname+"\' where shelf='"+req.body.shelf+"'";    
+            console.log(query);
+            const result = (await db.client.query(query,[]));
+            res.status(200);
+            res.send("Success");
+        }
     }else {
         res.status(403);
         res.send('Forbidden: Not Authorized');
