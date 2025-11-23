@@ -91,7 +91,7 @@ app.post('/updateprod/:apikey', async (req, res)=>{
     console.log(req.body.product);
         
     if(req.params.apikey=== 'uZMeXQsUlruWM86') {
-        var selqry = "select * from productdb where prodname like '%"+req.body.product+"%'";
+        var selqry = "select * from productdb where prodname ILIKE '%"+req.body.product+"%'";
         const prodresult = ((await db.client.query(selqry,[])).rows[0]);
         console.log(prodresult);
         if(prodresult){
