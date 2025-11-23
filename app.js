@@ -86,6 +86,7 @@ app.post('/updateshelf/:apikey', async (req, res)=>{
 
 app.post('/updateprod/:apikey', async (req, res)=>{
 
+    console.log(req.body);
     console.log(req.body.shelf);
     console.log(req.body.product);
         
